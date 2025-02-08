@@ -3,12 +3,16 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import Product from "./models/product.model.js";
+import path from'path';
 dotenv.config();
 
 const app = express();
 const port = 5000;
 
 app.use(express.json());
+
+
+const __dirname = path.resolve();
 
 
 app.get("/api/products", async (req, res) => {
@@ -76,7 +80,14 @@ app.put("/api/products/:id", async (req, res) => {
   
 })
 
-// console.log(process.env.MONGO_URI);
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
+
 
 
 app.listen(port, () => {
