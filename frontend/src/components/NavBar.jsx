@@ -30,12 +30,18 @@ export default function NavBar() {
           fontWeight={"bold"}
           textTransform={"uppercase"}
           textAlign={"center"}
-          bgGradient={"linear(to-r, cyan.400, blue.500)"}
-          bgClip={"text"}
-          _hover={{ color: "cyan.600"  , textDecoration: "underline"}}
+          bgGradient="linear(to-r, cyan.400, blue.500)"
+          bgClip="text"
         >
-          <Link to={"/"}>Product Store 🛒</Link>
+          <Link
+            to={"/"}
+            style={{ textDecoration: "none" }}
+            _hover={{ textDecoration: "underline" }}
+          >
+            Product Store 🛒
+          </Link>
         </Text>
+
         <HStack>
           <Link to="/create">
             <Button>
